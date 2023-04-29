@@ -1,0 +1,135 @@
+# ###############################################################################
+cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+set(CMAKE_CUDA_ARCHITECTURES 61 75)
+project(VolumeVoronoiGPU LANGUAGES CXX CUDA)
+
+# ###############################################################################
+set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_DEBUG_POSTFIX "d")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+
+# ###############################################################################
+find_package(CUDA REQUIRED)
+link_directories(${CUDA_TOOLKIT_ROOT_DIR}/lib/x64)
+
+find_package(OpenMP)
+
+if(OPENMP_FOUND)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+endif()
+
+find_package(CUDA REQUIRED)
+include_directories("${CUDA_INCLUDE_DIRS}")
+
+find_package(ZLIB REQUIRED)
+
+find_package(CGA REQUIRED)
+
+# add dependencies
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+option(AUTO_DOWNLOAD "Auto download dependencies" ON)
+include(rpdDependencies)
+add_subdirectory(extern/tetgen)
+add_subdirectory(extern/kNN-CUDA)
+add_subdirectory(extern/mshloader)
+
+# ###############################################################################
+# For VolumeVoronoiGPU binary
+# ###############################################################################
+set(HEADER_LIST
+    "src/common.h"
+    "src/convex_cell.h"
+    "src/cuda_utils.h"
+    "src/knearests.h"
+    "src/params.h"
+    # "src/stopwatch.h"
+    "src/io.h"
+    "src/shrinking.h"
+    "src/fix_topo.h"
+    "src/fix_geo.h"
+    "src/fix_extf.h"
+    "src/fix_intf.h"
+    "src/medial_sphere.h"
+    "src/medial_mesh.h"
+    "src/medial_primitives.h"
+    "src/voronoi_defs.h"
+    "src/voronoi.h"
+    "src/io_utils.hpp"
+    "src/zip.hpp"
+    "src/sharp_feature_detection.h"
+    "src/input_types.h"
+    "src/thinning.h"
+    "src/triangulation.h"
+)
+
+set(SOURCE_LIST
+    "src/main_voronoi.cpp" # yes, not .cu (for compiling CGAL)
+    "src/io.cxx"
+    "src/input_types.cxx"
+    "src/medial_sphere.cxx"
+    "src/shrinking.cxx"
+    "src/updating.cxx"
+    "src/main_gui.cxx"
+    "src/external/Predicates.cxx"
+    "src/fix_topo.cxx"
+    "src/fix_geo.cxx"
+    "src/fix_extf.cxx"
+    "src/fix_intf.cxx"
+    "src/medial_sphere.cxx"
+    "src/medial_mesh.cxx"
+    "src/medial_primitives.cxx"
+    "src/voronoi_defs.cu"
+    "src/convex_cell.cu"
+    "src/knearests.cu"
+    "src/voronoi.cu"
+    "src/io_utils.cpp"
+    "src/zip.cpp"
+    "src/sharp_feature_detection.cxx"
+    "src/thinning.cxx"
+    "src/triangulation.cxx"
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_LIST} ${HEADER_LIST})
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
+    --generate-line-info
+    --use_fast_math
+    >)
+target_compile_features(${PROJECT_NAME} PUBLIC cuda_std_17)
+target_compile_definitions(${PROJECT_NAME} PUBLIC -Dgeogram_EXPORTS)
+
+if(${MSVC})
+    if(${CMAKE_VERSION} VERSION_GREATER 3.6.0)
+        set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${PROJECT_NAME}")
+    endif()
+endif()
+
+target_link_directories(${PROJECT_NAME} PUBLIC "${CMAKE_BINARY_DIR}/lib")
+target_link_libraries(${PROJECT_NAME}
+    debug tetd
+    debug kNN-CUDAd
+    optimized tet
+    optimized kNN-CUDA
+    general cuda
+    general cublas
+    optimized mshloader
+    optimized polyscope
+    optimized geogram
+    optimized nlohmann_json::nlohmann_json
+    optimized ZLIB::ZLIB
+    optimized CGAL::CGAL
+)
+target_link_libraries(${PROJECT_NAME} general ${CUDA_LIBRARIES})
+
+# ###############################################################################
+# For VORO_GUI binary
+# ###############################################################################
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -pthread -D_DEBUG")
+
+add_executable(VORO_GUI src/test_gui.cpp)
+target_link_libraries(VORO_GUI PUBLIC polyscope mshloader)

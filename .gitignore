@@ -1,0 +1,18 @@
+# Extern
+/extern/.cache
+#/extern/geogram
+#/extern/libigl
+#/extern/spdlog
+#/extern/polyscope
+#*extern*/*
+
+# Build
+*build*/*
+.idea/*
+.vscode/
+.DS_Store
+
+
+# Output
+*out*/*
+*sup*/*
