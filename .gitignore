@@ -1,10 +1,10 @@
 # Extern
 /extern/.cache
-#/extern/geogram
-#/extern/libigl
-#/extern/spdlog
-#/extern/polyscope
-#*extern*/*
+/extern/geogram
+/extern/libigl
+/extern/spdlog
+/extern/polyscope
+*extern*/*
 
 # Build
 *build*/*
