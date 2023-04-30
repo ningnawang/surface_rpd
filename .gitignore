@@ -4,7 +4,7 @@
 /extern/libigl
 /extern/spdlog
 /extern/polyscope
-*extern*/*
+# *extern*/*
 
 # Build
 *build*/*
