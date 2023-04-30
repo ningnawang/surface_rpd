@@ -47,6 +47,7 @@ struct Parameter {
                                // (https://stackoverflow.com/a/7560146)
 
 #define FOR(I, UPPERBND) for (int I = 0; I < int(UPPERBND); ++I)
+#define SCALAR_ZERO 1e-3
 #define SCALAR_ZERO_6 1e-6  // float, 1e-8 if double
 #define SCALAR_ZERO_5 1e-5
 #define SCALAR_ZERO_4 1e-4

@@ -43,10 +43,12 @@
  *
  */
 
+#include "generic_RPD_cell.h"
+
 #include <geogram/mesh/mesh_halfedges.h>
 #include <geogram/numerics/predicates.h>
-#include <matfp/geogram/generic_RPD_cell.h>
-#include <matfp/geogram/predicates.h>
+
+#include "predicates.h"
 
 namespace matfp {
 index_t ConvexCellCGAL::plus1mod3_[3] = {1, 2, 0};
@@ -83,7 +85,8 @@ GEO::Sign ConvexCellCGAL::side_exact(const Mesh* mesh,
             pi, wi, b0_point.data(), rt->get_weight(b0), b1_point.data(),
             rt->get_weight(b1), b2_point.data(), rt->get_weight(b2), pj, wj);
       } else {
-        log_and_throw("NOT IMPLEMENTED FOR OTHER DIM!");
+        printf("NOT IMPLEMENTED FOR OTHER DIM!\n");
+        assert(false);
       }
     }
 

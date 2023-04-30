@@ -42,11 +42,13 @@
  *     FRANCE
  *
  */
+#include "generic_RPD_polygon.h"
+
 #include <geogram/numerics/predicates.h>
-#include <matfp/geogram/generic_RPD_polygon.h>
-#include <matfp/geogram/predicates.h>
 
 #include <algorithm>
+
+#include "predicates.h"
 
 namespace matfp {
 

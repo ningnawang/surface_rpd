@@ -58,12 +58,13 @@
 #include <deque>
 #include <iostream>
 
-#include "src/matfp/geogram/RPD_callback.h"
-#include "src/matfp/geogram/generic_RPD_cell.h"
-#include "src/matfp/geogram/generic_RPD_polygon.h"
-#include "src/matfp/geogram/generic_RPD_utils.h"
-#include "src/matfp/geogram/generic_RPD_vertex.h"
-#include "src/triangulation.h"
+#include "RPD_callback.h"
+#include "generic_RPD_cell.h"
+#include "generic_RPD_polygon.h"
+#include "generic_RPD_utils.h"
+#include "generic_RPD_vertex.h"
+#include "params.h"
+#include "triangulation.h"
 
 namespace matfp {
 using namespace GEOGen;
@@ -674,8 +675,8 @@ class GenRestrictedPowerDiagram {
         current_seed_ = current_seed_handle_->info().tag;
         adjacent_seeds.pop();
 
-        logger().debug("--------------processing current tet {} seed {}",
-                       current_tet_, current_seed_);
+        // logger().debug("--------------processing current tet {} seed {}",
+        //                current_tet_, current_seed_);
 
         C.initialize_from_mesh_tetrahedron(mesh_, current_tet_, symbolic_,
                                            vertex_weight);
@@ -862,8 +863,8 @@ class GenRestrictedPowerDiagram {
       C.clear();
     }
 
-    logger().debug("processing clip_by_plane i {} and j {}",
-                   seed->info().all_tag, neigh_seed->info().all_tag);
+    // logger().debug("processing clip_by_plane i {} and j {}",
+    //                seed->info().all_tag, neigh_seed->info().all_tag);
     clip_by_plane(C, seed, neigh_seed);
   }
 
@@ -913,7 +914,8 @@ class GenRestrictedPowerDiagram {
    **/
   Vertex_handle_rt find_adjacent_seed(GEO::index_t neigh_s_tag) {
     if (neighbors_.size() == 0) {
-      log_and_throw("neighbors_ not been cached properly!");
+      printf("neighbors_ not been cached properly!\n");
+      assert(false);
     }
     // std::cout << "in find_adjacent_seed, neighbors_ size: " <<
     // neighbors_.size() << std::endl;
@@ -927,7 +929,8 @@ class GenRestrictedPowerDiagram {
       std::cout << "neigh_s_tag: " << neigh_s_tag
                 << " and neighbors_ tag: " << n->info().tag << std::endl;
     }
-    log_and_throw("neighbor vertex handle not found!");
+    printf("neighbor vertex handle not found!\n");
+    assert(false);
   }
 
   /**

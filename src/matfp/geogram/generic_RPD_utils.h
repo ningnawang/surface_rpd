@@ -47,13 +47,14 @@
 
 #include <geogram/basic/common.h>
 #include <geogram/basic/memory.h>
-#include <matfp/geogram/generic_RPD_cell.h>
-#include <matfp/geogram/generic_RPD_polygon.h>
-#include <matfp/geogram/generic_RPD_vertex.h>
-#include <src/triangulation.h>
 
 #include <stack>
 #include <vector>
+
+#include "generic_RPD_cell.h"
+#include "generic_RPD_polygon.h"
+#include "generic_RPD_vertex.h"
+#include "triangulation.h"
 
 namespace matfp {
 using namespace GEO;

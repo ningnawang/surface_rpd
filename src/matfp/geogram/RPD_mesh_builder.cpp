@@ -43,7 +43,7 @@
  *
  */
 
-#include <matfp/geogram/RPD_mesh_builder.h>
+#include "RPD_mesh_builder.h"
 
 namespace matfp {
 

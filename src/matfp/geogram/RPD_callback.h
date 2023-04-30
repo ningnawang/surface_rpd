@@ -48,10 +48,10 @@
 #include <geogram/basic/common.h>
 #include <geogram/voronoi/RVD_callback.h>
 
-#include "src/matfp/geogram/RPD_mesh_builder.h"
-#include "src/matfp/geogram/generic_RPD_cell.h"
-#include "src/matfp/geogram/generic_RPD_polygon.h"
-#include "src/matfp/geogram/generic_RPD_vertex.h"  // for GEO::RVDCallback
+#include "RPD_mesh_builder.h"
+#include "generic_RPD_cell.h"
+#include "generic_RPD_polygon.h"
+#include "generic_RPD_vertex.h"  // for GEO::RVDCallback
 // #include <geogram/voronoi/generic_RVD_vertex.h> // for GEO::RVDCallback
 #include <geogram/basic/numeric.h>
 #include <geogram/mesh/mesh.h>

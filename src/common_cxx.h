@@ -153,6 +153,17 @@ inline std::string get_other_file_path(std::string filePath, int type) {
   assert(false);
 }
 
+inline double get_triangle_area(const Vector3& v1, const Vector3& v2,
+                                const Vector3& v3) {
+  // Heron's formula
+  double l1 = GEO::length(v1 - v2);
+  double l2 = GEO::length(v1 - v3);
+  double l3 = GEO::length(v2 - v3);
+  double p = (l1 + l2 + l3) / 2;
+  double s = std::sqrt(p * (p - l1) * (p - l2) * (p - l3));
+  return s;
+}
+
 inline Vector3 get_triangle_centroid(const Vector3& v1, const Vector3& v2,
                                      const Vector3& v3) {
   return (v1 + v2 + v3) / 3.;

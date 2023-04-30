@@ -482,7 +482,7 @@ class Vertex {
 
   double dot_at(const double* p1, const double* p2, const double* ref,
                 int DIM) {
-    double r;
+    double r = 0.0;
     for (coord_index_t c = 0; c < DIM; ++c) {
       r += (p1[c] - ref[c]) * (p2[c] - ref[c]);
     }

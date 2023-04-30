@@ -43,14 +43,14 @@
  *
  */
 
-#include "src/matfp/geogram/RPD_callback.h"
+#include "RPD_callback.h"
 
 #include <geogram/basic/argused.h>
 #include <geogram/mesh/mesh_geometry.h>
 #include <geogram/mesh/mesh_io.h>
 
-#include "src/matfp/geogram/RPD_mesh_builder.h"
-#include "src/matfp/geogram/generic_RPD_cell.h"
+#include "RPD_mesh_builder.h"
+#include "generic_RPD_cell.h"
 
 namespace {
 using namespace GEO;

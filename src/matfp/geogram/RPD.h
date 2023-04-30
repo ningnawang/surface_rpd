@@ -53,11 +53,11 @@
 #include <geogram/mesh/index.h>
 #include <geogram/mesh/mesh.h>
 
-#include "src/common_cxx.h"
-#include "src/matfp/geogram/RPD_callback.h"
-#include "src/matfp/geogram/RPD_mesh_builder.h"
-#include "src/matfp/geogram/generic_RPD.h"
-#include "src/triangulation.h"
+#include "RPD_callback.h"
+#include "RPD_mesh_builder.h"
+#include "common_cxx.h"
+#include "generic_RPD.h"
+#include "triangulation.h"
 
 namespace matfp {
 using namespace GEO;

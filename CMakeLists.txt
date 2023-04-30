@@ -40,6 +40,14 @@ set(CXX_HEADER_LIST
     "src/matfp/geogram/predicates/powerside3.h"
     "src/matfp/geogram/predicates/powerside4.h"
     "src/matfp/geogram/predicates.h"
+    "src/matfp/geogram/RPD.h"
+    "src/matfp/geogram/generic_RPD.h"
+    "src/matfp/geogram/generic_RPD_vertex.h"
+    "src/matfp/geogram/generic_RPD_polygon.h"
+    "src/matfp/geogram/generic_RPD_cell.h"
+    "src/matfp/geogram/generic_RPD_utils.h"
+    "src/matfp/geogram/RPD_mesh_builder.h"
+    "src/matfp/geogram/RPD_callback.h"
 )
 
 set(CXX_SOURCE_LIST
@@ -51,20 +59,11 @@ set(CXX_SOURCE_LIST
     "src/triangulation.cxx"
 
     "src/matfp/geogram/predicates.cpp"
-
-    # "src/matfp/geogram/RPD.cpp"
-    # "src/matfp/geogram/RPD.h"
-    # "src/matfp/geogram/generic_RPD.h"
-    # "src/matfp/geogram/generic_RPD_vertex.h"
-    # "src/matfp/geogram/generic_RPD_polygon.cpp"
-    # "src/matfp/geogram/generic_RPD_polygon.h"
-    # "src/matfp/geogram/generic_RPD_cell.cpp"
-    # "src/matfp/geogram/generic_RPD_cell.h"
-    # "src/matfp/geogram/generic_RPD_utils.h"
-    # "src/matfp/geogram/RPD_mesh_builder.cpp"
-    # "src/matfp/geogram/RPD_mesh_builder.h"
-    # "src/matfp/geogram/RPD_callback.cpp"
-    # "src/matfp/geogram/RPD_callback.h"
+    "src/matfp/geogram/RPD.cpp"
+    "src/matfp/geogram/generic_RPD_polygon.cpp"
+    "src/matfp/geogram/generic_RPD_cell.cpp"
+    "src/matfp/geogram/RPD_mesh_builder.cpp"
+    "src/matfp/geogram/RPD_callback.cpp"
 )
 
 add_executable(${PROJECT_NAME} ${CXX_HEADER_LIST} ${CXX_SOURCE_LIST})

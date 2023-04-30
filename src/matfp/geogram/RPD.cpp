@@ -42,7 +42,7 @@
  *     FRANCE
  *
  */
-#include "src/matfp/geogram/RPD.h"
+#include "RPD.h"
 
 #include <geogram/basic/algorithm.h>
 #include <geogram/basic/argused.h>
@@ -56,10 +56,10 @@
 #include <geogram/mesh/mesh_sampling.h>
 #include <geogram/voronoi/integration_simplex.h>
 
-#include "src/common_cxx.h"
-#include "src/matfp/geogram/RPD_callback.h"
-#include "src/matfp/geogram/RPD_mesh_builder.h"
-#include "src/matfp/geogram/generic_RPD.h"
+#include "RPD_callback.h"
+#include "RPD_mesh_builder.h"
+#include "common_cxx.h"
+#include "generic_RPD.h"
 
 namespace {
 using namespace GEO;
@@ -516,9 +516,9 @@ class RPD_3d_Impl : public matfp::RestrictedPowerDiagram {
       }
 
       index_t f_idx = triangle_regions_.size() - 1;
-      if (f_idx == 85612 || f_idx == 85611 || f_idx == 8260) {
-        printf("fidx {} has vertices ({},{},{})", f_idx, iv4, iv3, iv\n2);
-      }
+      // if (f_idx == 85612 || f_idx == 85611 || f_idx == 8260) {
+      //   printf("fidx {} has vertices ({},{},{})", f_idx, iv4, iv3, iv4\n2);
+      // }
 
       // store adjacent info
       if (rpd_point_adj_ != nullptr && v_adj != -1 && v != v_adj) {
@@ -638,9 +638,6 @@ class RPD_3d_Impl : public matfp::RestrictedPowerDiagram {
     index_t find_or_create_vertex(index_t center_vertex_id, const Vertex& v) {
       index_t result =
           vertex_map_.find_or_create_vertex(center_vertex_id, v.sym());
-      if (result == 231992 || result == 231989 || result == 40121) {
-        printf("new vertex {} is created, tag {}", resu\nlt, center_vertex_id);
-      }
 
       if (result >= nb_vertices_) {
         geo_assert(result == nb_vertices_);
@@ -881,7 +878,7 @@ class RPD_3d_Impl : public matfp::RestrictedPowerDiagram {
 
     if (volumetric_) {
       printf("ERROR: cannot compute volumetric RPD.\n");
-      log_and_throw("ERROR");
+      assert(false);
     } else {  // surfacic
 
       matfp::RPDMeshBuilder builder(&M, mesh_, rpd_seed_adj, rpd_vs_bisectors);

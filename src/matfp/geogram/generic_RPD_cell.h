@@ -49,12 +49,12 @@
 #include <geogram/basic/argused.h>
 #include <geogram/basic/attributes.h>
 #include <geogram/basic/common.h>
-#include <matfp/Logger.h>
-#include <matfp/geogram/generic_RPD_vertex.h>
-#include <src/triangulation.h>
+#include <triangulation.h>
 
 #include <iosfwd>
 #include <stack>
+
+#include "generic_RPD_vertex.h"
 
 /**
  * \file geogram/voronoi/generic_RPD_cell.h
@@ -1089,13 +1089,13 @@ class GEOGRAM_API ConvexCellCGAL {
   inline void print_sign(GEO::Sign& s) const {
     switch (s) {
       case GEO::Sign::ZERO:
-        logger().debug("sign is 0");
+        printf("sign is 0\n");
         break;
       case GEO::Sign::POSITIVE:
-        logger().debug("sign is 1");
+        printf("sign is 1\n");
         break;
       case GEO::Sign::NEGATIVE:
-        logger().debug("sign is -1");
+        printf("sign is -1\n");
         break;
       default:
         break;
@@ -1132,11 +1132,11 @@ class GEOGRAM_API ConvexCellCGAL {
     const double wi = rt->get_weight(i->point());
     const double wj = rt->get_weight(j->point());
 
-    if (pi[3] != wi || pj[3] != wj) {
-      logger().error("checking side pi {}, pj {}, wi {}, wj {}", pi, pj, wi,
-                     wj);
-      log_and_throw("ERROR");
-    }
+    // if (pi[3] != wi || pj[3] != wj) {
+    //   logger().error("checking side pi {}, pj {}, wi {}, wj {}", pi, pj, wi,
+    //                  wj);
+    //   log_and_throw("ERROR");
+    // }
 
     // logger().debug("pi: {}, pj: {}", i->info().tag, j->info().tag);
 

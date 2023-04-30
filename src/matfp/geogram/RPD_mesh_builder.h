@@ -51,10 +51,11 @@
 #include <geogram/mesh/index.h>
 #include <geogram/mesh/mesh.h>
 #include <geogram/voronoi/generic_RVD.h>
-#include <matfp/geogram/generic_RPD_vertex.h>
 
 #include <map>
 #include <vector>
+
+#include "generic_RPD_vertex.h"
 
 /**
  * \file geogram/voronoi/RPD_mesh_builder.h

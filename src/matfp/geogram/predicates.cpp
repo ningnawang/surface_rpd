@@ -42,7 +42,7 @@
  *     FRANCE
  *
  */
-#include "src/matfp/geogram/predicates.h"
+#include "predicates.h"
 
 #include <geogram/basic/assert.h>
 #include <geogram/basic/command_line.h>
@@ -55,10 +55,10 @@
 #include <algorithm>
 
 #define FPG_UNCERTAIN_VALUE 0
-#include "src/matfp/geogram/predicates/powerside1.h"
-#include "src/matfp/geogram/predicates/powerside2.h"
-#include "src/matfp/geogram/predicates/powerside3.h"
-#include "src/matfp/geogram/predicates/powerside4.h"
+#include "predicates/powerside1.h"
+#include "predicates/powerside2.h"
+#include "predicates/powerside3.h"
+#include "predicates/powerside4.h"
 
 // Reference: https://hal.inria.fr/hal-01225202/document
 namespace matfp {

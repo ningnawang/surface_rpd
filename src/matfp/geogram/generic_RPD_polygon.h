@@ -47,8 +47,9 @@
 
 #include <geogram/basic/attributes.h>
 #include <geogram/basic/common.h>
-#include <matfp/geogram/generic_RPD_vertex.h>
-#include <src/triangulation.h>
+
+#include "generic_RPD_vertex.h"
+#include "triangulation.h"
 
 namespace matfp {
 // using namespace GEOGen;
